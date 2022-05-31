@@ -1,11 +1,19 @@
 import { Container } from "@mui/system";
-import React from "react";
+import React, {useRef, useState} from "react";
 import TextField from '@mui/material/TextField';
 import './style.css'
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom";
 
+
 const RegisterForm = () => {
+    const emailRef = useRef()
+    const passwordRef = useRef()
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+    }
+
     return(
         <div 
         style={{
@@ -25,6 +33,7 @@ const RegisterForm = () => {
                 <h1 className="loginFormTitle">
                     Zarejestruj sie
                 </h1>
+                <form onSubmit={handleSubmit}>
                 <p>
                     Imię
                 </p>
@@ -39,7 +48,8 @@ const RegisterForm = () => {
                 <TextField 
                     id="outlined-basic" 
                     fullWidth 
-                    variant="outlined" 
+                    variant="outlined"
+                    ref={emailRef} 
                 />
                 <p>
                     Hasło
@@ -48,6 +58,7 @@ const RegisterForm = () => {
                     id="outlined-basic" 
                     fullWidth 
                     variant="outlined" 
+                    ref={passwordRef}
                 />
                 <p>
                     Potwierdź hasło
@@ -60,12 +71,14 @@ const RegisterForm = () => {
                 <Button 
                     variant="contained"
                     fullWidth
+                    type="submit"
                     sx={{
                         marginTop: "20px"
                     }}
                 >
                     Zarejestruj się
                 </Button>
+                </form> 
                 <Link 
                     to="/login"
                     style={{
