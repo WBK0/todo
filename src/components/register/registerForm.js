@@ -5,7 +5,7 @@ import './style.css'
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom";
 
-const LoginForm = () => {
+const RegisterForm = () => {
     return(
         <div 
         style={{
@@ -23,8 +23,16 @@ const LoginForm = () => {
                     paddingBottom: "80px",
             }}>
                 <h1 className="loginFormTitle">
-                    Zaloguj się
+                    Zarejestruj sie
                 </h1>
+                <p>
+                    Imię
+                </p>
+                <TextField 
+                    id="outlined-basic" 
+                    fullWidth 
+                    variant="outlined" 
+                />
                 <p>
                     Email
                 </p>
@@ -41,6 +49,14 @@ const LoginForm = () => {
                     fullWidth 
                     variant="outlined" 
                 />
+                <p>
+                    Potwierdź hasło
+                </p>
+                <TextField 
+                    id="outlined-basic" 
+                    fullWidth 
+                    variant="outlined" 
+                />
                 <Button 
                     variant="contained"
                     fullWidth
@@ -48,10 +64,10 @@ const LoginForm = () => {
                         marginTop: "20px"
                     }}
                 >
-                    Zaloguj się
+                    Zarejestruj się
                 </Button>
                 <Link 
-                    to="/register"
+                    to="/login"
                     style={{
                         textDecoration: "none",
                         color: "black",
@@ -64,7 +80,7 @@ const LoginForm = () => {
                             
                         }}
                     >
-                        Nie masz konta?
+                        Masz już konto?
                     </p>
                 </Link>
             </Container>
@@ -72,4 +88,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm;
+export default RegisterForm;
