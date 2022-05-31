@@ -1,11 +1,32 @@
 import { Container } from "@mui/system";
-import React from "react";
+import React, {useRef, useState} from "react";
 import TextField from '@mui/material/TextField';
 import './style.css'
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom";
+import {
+    createUserWithEmailAndPassword,
+} from "firebase/auth";
+  import { auth } from "../firebase";
 
 const RegisterForm = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        try {
+            const user = await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            console.log(user);
+          } catch (error) {
+            console.log(error.message);
+          }
+    }
+
     return(
         <div 
         style={{
@@ -25,6 +46,7 @@ const RegisterForm = () => {
                 <h1 className="loginFormTitle">
                     Zarejestruj sie
                 </h1>
+                <form onSubmit={handleSubmit}>
                 <p>
                     Imię
                 </p>
@@ -39,15 +61,22 @@ const RegisterForm = () => {
                 <TextField 
                     id="outlined-basic" 
                     fullWidth 
-                    variant="outlined" 
+                    variant="outlined"
+                    onChange={
+                        (e) => setEmail(e.target.value)
+                    }
                 />
                 <p>
                     Hasło
                 </p>
                 <TextField 
                     id="outlined-basic" 
-                    fullWidth 
+                    fullWidth
+                    type="password" 
                     variant="outlined" 
+                    onChange={
+                        (e) => setPassword(e.target.value)
+                    }
                 />
                 <p>
                     Potwierdź hasło
@@ -60,12 +89,14 @@ const RegisterForm = () => {
                 <Button 
                     variant="contained"
                     fullWidth
+                    type="submit"
                     sx={{
                         marginTop: "20px"
                     }}
                 >
                     Zarejestruj się
                 </Button>
+                </form> 
                 <Link 
                     to="/login"
                     style={{

@@ -4,11 +4,17 @@ import './style.css';
 import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
+import { useState } from 'react';
+
 
 const TasksForm = () =>{
+    const [task, setTask] = useState("")
+    
+
     return(
         <>
             <h1 className='taskFormTitle'>DO ZROBIENIA</h1>
+            <form >
             <Grid 
             container
             spacing={2}
@@ -22,6 +28,9 @@ const TasksForm = () =>{
                     label="Co masz do zrobienia?" 
                     variant="outlined" 
                     className="addTaskInput" 
+                    onChange={
+                        (e) => setTask(e.target.value)
+                    }
                     fullWidth
                     />
                 </Grid>
@@ -29,6 +38,7 @@ const TasksForm = () =>{
                     <Button 
                     variant="contained"
                     size="large" 
+                    type="submit"
                     fullWidth 
                     endIcon={<AddIcon />}
                     sx={{
@@ -39,7 +49,9 @@ const TasksForm = () =>{
                         Dodaj
                     </Button>
                 </Grid>
+               
             </Grid>
+            </form>
         </>
     )
 }

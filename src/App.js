@@ -5,8 +5,12 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import TasksList from './components/taskList/tasks';
 import Navbar from './components/navbar/navbar';
-
+import {
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "./components/firebase";
 function App() {
+
   return (
     <>
     <Navbar/>
