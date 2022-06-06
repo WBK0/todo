@@ -13,7 +13,7 @@ const Routing = () => {
   return (
     <div className="App">
       <Routes>
-        {auth.currentUser != null && <Route path="/" element={<App />} />}
+        <Route path="/" element={<App />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
       </Routes>

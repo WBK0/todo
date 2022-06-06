@@ -1,19 +1,34 @@
 import { Grid, Checkbox } from '@mui/material';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './style.css';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { db, auth } from "../firebase";
+
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+
 const TasksList = () => {
 
-    const tasksTodo = [{
-        task: "test",
-        completed: false
-    },
-    {
-        task: "test1",
-        completed: true
-    }]
+    const tasksCollectionRef = collection(db, "tasks");
+
+    const [tasksTodo, setTasksTodo] = useState([])
+
+    useEffect(() => {
+        const getUsers = async () => {
+          const data = await getDocs(tasksCollectionRef);
+          setTasksTodo(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        };
+    
+        getUsers();
+      }, []);
 
     
 

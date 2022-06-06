@@ -5,16 +5,32 @@ import Grid from '@mui/material/Grid';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import { db, auth } from "../firebase";
 
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 const TasksForm = () =>{
     const [task, setTask] = useState("")
+    const tasksCollectionRef = collection(db, "tasks");
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        await addDoc(tasksCollectionRef, { task: task, uid: auth.currentUser.uid});
+    }
     
 
     return(
         <>
             <h1 className='taskFormTitle'>DO ZROBIENIA</h1>
-            <form >
+            <form onSubmit={handleSubmit}>
             <Grid 
             container
             spacing={2}
